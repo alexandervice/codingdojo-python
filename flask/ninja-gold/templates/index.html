@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous" defer></script>
+    <title>Ninja Gold</title>
+</head>
+<body class="bg-dark p-5 text-muted">
+    <div class="container text-center p-5 py-4 justify-content-md-center text-bg-secondary text-light rounded" >
+        <h1 class="text-light">Ninja Gold</h1>
+        <h4 class="mt-2 text-start">Your Gold: <span class="text-warning border" id="gold">{{session['gold']}}</span></h4>
+        <p class="mt-4 text-start">Goal: aquire 500 gold within 15 turns. 
+            <span class="text-warning">
+                {% if session['turns'] >= 0 %}
+                    Turns remaining: {{session['turns']}}
+                {% elif session['turns'] < 0 %}
+                    {% if session['gold'] >= 500 %}
+                        <h2 class="bg-dark p-5 text-success">YOU WIN</h2>
+                    {% elif session['gold'] < 500 %}
+                        <h2 class="bg-dark p-5 text-danger">YOU LOSE</h2>
+                    {% endif %}
+                {% endif %}
+            </span>
+            {{game_over|safe}}
+        </p>
+        <div class="row activities mt-4 mb-4">
+            <div class="col border pt-5 pb-5 location">
+                <h3>Farm</h3>
+                <p>(earns 10-20 gold)</p>
+                <form action="/process_money" method="post">
+                    <input type="hidden" name="building" value="farm" />
+                    <button type="submit"  class="btn btn-warning ">Find Gold!</button>
+                </form>
+            </div>
+            <div class="col border pt-5 pb-5 location">
+                <h3>Cave</h3>
+                <p>(earns 5-10 gold)</p>
+                <form action="/process_money" method="post">
+                    <input type="hidden" name="building" value="cave" />
+                    <button type="submit"  class="btn btn-warning ">Find Gold!</button>
+                </form>
+            </div>
+            <div class="col border pt-5 pb-5 location">
+                <h3>House</h3>
+                <p>(earns 2-5 gold)</p>
+                <form action="/process_money" method="post">
+                    <input type="hidden" name="building" value="house" />
+                    <button type="submit"  class="btn btn-warning ">Find Gold!</button>
+                </form>
+            </div>
+            <div class="col border pt-5 pb-5">
+                <h3>Casino</h3>
+                <p>(earns/takes 0-50 gold)</p>
+                <form action="/process_money" method="post">
+                    <input type="hidden" name="building" value="casino" />
+                    <button type="submit"  class="btn btn-warning ">Find Gold!</button>
+                </form>
+            </div>
+        </div>
+        <h5 class="text-start">Activities</h5>
+        <div class="row bg-dark border p-1 activities mb-4" >
+            {% for i in range(len, -1, -1) %}
+                {{message[i] |safe}}
+            {% endfor %}
+            
+        </div>
+        <!-- <form action="/reset" method="post">
+            <button type="submit"  class="btn btn-danger ">Start Over</button>
+        </form> -->
+    </div>
+    
+    
+</body>
+</html>

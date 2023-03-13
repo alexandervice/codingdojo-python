@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous" defer></script>
+    <title>Change Order</title>
+</head>
+<body class="bg-dark p-5 text-muted">
+    <div class="container bg-light p-5 py-4  text-bg-secondary text-dark rounded" >
+        <form action="/">
+            <button type="submit"  class="btn btn-sm btn-dark">Back to Purchases</button>
+        </form>
+        <h1 class="text-center">Change Order</h1>
+        <form class="order-form" action="/orders/update" method="POST">
+            <!-- declare a variable called messages -->
+            {% with messages = get_flashed_messages() %}
+                <!-- check if there are any messages -->
+                {% if messages %}
+                    <!-- loop through -->
+                    {% for message in messages %}
+                        <p class="text-danger" >{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="form-group mt-3">
+                <label class="text-start" for="customer_name">Name:</label>
+                <input  class="form-control" type="text" name="customer_name" value="{{order.customer_name}}">
+            </div>
+            <div class="form-group mt-3">
+                <label class="text-start"  for="cookie_type">Cookie Type:</label>
+                <input class="form-control"  type="text" name="cookie_type" value="{{order.cookie_type}}">
+            </div>
+            <div class="form-group mt-3">
+                <label for="number_of_boxes" >Number of Boxes:</label>
+                <input class="form-control"  type="number" min="1" max="10000" name="number_of_boxes" value="{{order.number_of_boxes}}">
+            </div>
+            <div class="form-group mt-3">
+                <input type="hidden" name="id" value="{{order.id}}" />
+                <button type="submit"  class="btn btn-success">Update</button>
+            </div>
+        </form> 
+    </div>
+</body>
+</html>

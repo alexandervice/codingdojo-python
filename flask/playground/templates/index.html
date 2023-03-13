@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}">
+    <title>Playground</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5%;
+            flex-wrap: wrap;
+        }
+        .box {
+            width: 150px;
+            min-width: 150px;
+            height: 150px;
+            margin: 25px;
+            border: 3px solid black;
+            border-radius: 10px;
+        }
+        
+        h1 {
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        </style>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p>Directions: please navigate to localhost:5000/play/number/color</p>
+    <p>You may select any number or color of your choice</p>
+        <div class="container">
+            {% for i in range(0,number) %}
+            <!-- <div class="box" style="background-color: {{color}};"></div> -->
+            {% endfor %}
+        </div>
+</body>
+</html>

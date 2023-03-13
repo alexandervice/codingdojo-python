@@ -1,0 +1,69 @@
+insert into users (first_name, last_name, created_at, updated_at)
+values
+("Alexander", "Vice", now(), now()),
+("Brandon", "Davis", now(), now()),
+("Nick", "Talley", now(), now()),
+("Tyler", "Schelling", now(), now()),
+("Tim", "Brigantino", now(), now()),
+("Ryan", "Wardle", now(), now());
+
+insert into friendships (user_id, friend_id, created_at, updated_at)
+values
+(1, 2, now(), now()),
+(1, 4, now(), now()),
+(1, 6, now(), now());
+
+insert into friendships (user_id, friend_id, created_at, updated_at)
+values
+(2, 1, now(), now()),
+(2, 3, now(), now()),
+(2, 5, now(), now());
+
+insert into friendships (user_id, friend_id, created_at, updated_at)
+values
+(3, 2, now(), now()),
+(3, 5, now(), now());
+
+insert into friendships (user_id, friend_id, created_at, updated_at)
+values
+(4, 3, now(), now());
+
+insert into friendships (user_id, friend_id, created_at, updated_at)
+values
+(5, 1, now(), now()),
+(5, 6, now(), now());
+
+insert into friendships (user_id, friend_id, created_at, updated_at)
+values
+(6, 2, now(), now()),
+(6, 3, now(), now());
+
+select concat(users.first_name, " ", users.last_name) as user_name, concat(user2.first_name, " ", user2.last_name) as friend_name from users
+join friendships on users.id = friendships.user_id
+left join users as user2 on user2.id = friendships.friend_id;
+
+select concat(user2.first_name, " ", user2.last_name) as friend_name from users
+join friendships on users.id = friendships.user_id
+left join users as user2 on user2.id = friendships.friend_id
+where friendships.user_id = 1;
+
+select count(*) from users
+join friendships on users.id = friendships.user_id
+left join users as user2 on user2.id = friendships.friend_id;
+
+select
+count(if(user_id=1,1,null)) as user_1_friends,
+count(if(user_id=2,1,null)) as user_2_friends,
+count(if(user_id=3,1,null)) as user_3_friends,
+count(if(user_id=4,1,null)) as user_4_friends,
+count(if(user_id=5,1,null)) as user_5_friends,
+count(if(user_id=6,1,null)) as user_6_friends
+from users
+join friendships on users.id = friendships.user_id
+left join users as user2 on user2.id = friendships.friend_id;
+
+select concat(user2.first_name, " ", user2.last_name) as friend_name from users
+join friendships on users.id = friendships.user_id
+left join users as user2 on user2.id = friendships.friend_id
+where friendships.user_id = 3
+order by friend_name asc;

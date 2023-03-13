@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous" defer></script>
+    <title>Friendships</title>
+</head>
+<body class="bg-dark p-5 text-muted">
+    <div class="container p-5 py-4 text-bg-secondary text-light rounded" >
+        <div class="row">
+            <div class="col p-5">
+                <h2 class="text-light text-center">Friendships</h2>
+                <table class="table table-hover table-md table-striped mt-4">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>User</th>
+                            <th>Friend</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-secondary">
+                        <!-- <tr>
+                            <td>{{friends[0][0].first_name}} {{friends[0][0].last_name}}</td>
+                            <td>{{friends[0][1].first_name}} {{friends[0][1].last_name}}</td>
+                        </tr> -->
+                        {%  for user in friends  %}
+                            <tr>
+                                {%  for i in range(0,2)  %}
+                                    <td>{{user[i].first_name}} {{user[i].last_name}}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col p-5">
+                <div class="row">
+                    <h2 class="text-light text-center">Add User</h2>
+                    <form class="user-form" action="/create_user" method="POST">
+                        <div class="form-group mt-3">
+                            <label class="text-start" for="first_name">First Name:</label>
+                            <input  class="form-control" type="text" name="first_name">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="text-start" for="last_name">Last Name:</label>
+                            <input  class="form-control" type="text" name="last_name">
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit"  class="btn btn-primary">Add User</button>
+                        </div>
+                    </form> 
+                </div>
+                <div class="row">
+                    <h2 class="text-light text-center mt-4">Create Friendship</h2>
+                    <form class="user-form" action="/friends/update" method="POST">
+                        <div class="form-group mt-3">
+                            <label class="text-start"  for="user_id">User:</label>
+                            <select class="form-control" name="user_id">
+                                <!-- <option value={{users.id}} selected hidden>{{users.frist_name}}</option> -->
+                                {% for user in users %}
+                                    <option value={{user.id}}>{{user.first_name}} {{user.last_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label class="text-start"  for="friend_id">Friend:</label>
+                            <select class="form-control" name="friend_id">
+                                {% for user in users %}
+                                    <option value={{user.id}}>{{user.first_name}} {{user.last_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit"  class="btn btn-success">Become Friends</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

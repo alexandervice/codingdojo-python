@@ -1,0 +1,16 @@
+select * from names;
+-- insert into names (name, created_at, updated_at)
+-- values("Alex", current_timestamp(), current_timestamp());
+-- insert into names (name, created_at, updated_at)
+-- values
+-- ("Brooke", current_timestamp(), current_timestamp()),
+-- ("Evangeline", current_timestamp(), current_timestamp()),
+-- ("Toaster", current_timestamp(), current_timestamp());
+-- update names
+-- set name = "Brandon"
+-- where id = 2;
+-- update names
+-- set name = "Luke"
+-- where id = 3;
+-- delete from names where id = 2;
+-- delete from names where id = 3;

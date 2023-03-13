@@ -1,0 +1,48 @@
+insert into dojos (name, created_at, updated_at)
+values
+("Los Angeles Branch", NOW(), NOW()),
+("San Diego Branch", NOW(), NOW()),
+("San Jose Branch", NOW(), NOW());
+
+SET SQL_SAFE_UPDATES = 0;
+delete from dojos;
+
+insert into dojos (name, created_at, updated_at)
+values
+("San Francisco Branch", NOW(), NOW()),
+("Seattle Branch", NOW(), NOW()),
+("Portland Branch", NOW(), NOW());
+
+insert into ninjas (dojo_id, first_name, last_name, age, created_at, updated_at)
+values
+(4, "Alexander", "Vice", 29, NOW(), NOW()),
+(4, "Brooke", "Vice", 29, NOW(), NOW()),
+(4, "Toaster", "Vice", 1, NOW(), NOW());
+
+insert into ninjas (dojo_id, first_name, last_name, age, created_at, updated_at)
+values
+(5, "Bruce", "Wayne", 32, NOW(), NOW()),
+(5, "Clark", "Kent", 33, NOW(), NOW()),
+(5, "Diana", "Prince", 5000, NOW(), NOW());
+
+insert into ninjas (dojo_id, first_name, last_name, age, created_at, updated_at)
+values
+(6, "Kevin", "Conroy", 66, NOW(), NOW()),
+(6, "Henry", "Cavill", 39, NOW(), NOW()),
+(6, "Gal", "Gadot", 37, NOW(), NOW());
+
+select * 
+from ninjas
+where dojo_id = 4;
+
+select * 
+from ninjas
+where dojo_id = 6;
+
+select dojo_id 
+from ninjas
+where id = 9;
+
+select name
+from dojos
+where id = 6;
